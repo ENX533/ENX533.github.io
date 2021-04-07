@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>模板海报预览</title>
+    <style>
+      html,
+      body,
+      div,
+      canvas {
+        margin: 0;
+        padding: 0;
+      }
+      .template-poster-preview {
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+        /* -webkit-transform: scale(0.5);
+        transform: scale(0.5); */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="template-poster-preview" class="template-poster-preview">
+      <div
+        class="tp-preview"
+        :style="{width: canvasWidth / 2 + 'px', height: canvasHeight / 2 + 'px'}"
+      >
+        <canvas class="tp-preview-canvas"></canvas>
+      </div>
+    </div>
+    <!-- 插件 -->
+    <!-- <script type="text/javascript" src="/common/js/lib/fabricjs/fabric.min.js"></script>
+    <script type="text/javascript" src="/common/js/lib/vuejs/vue.min.js"></script> -->
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/fabricjs/fabric.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/vuejs/vue.min.js"
+    ></script>
+    <script>
+      (function () {
+        var border = 10;
+        var uiRatio = 1 / 2;
+        new Vue({
+          el: "#template-poster-preview",
+          data: function () {
+            return {
+              border: border * uiRatio,
+              canvasWidth: 750 * uiRatio,
+              canvasHeight:
+                (((750 - border * 2) / 2) * 3 + border * 2 + 180 - border) *
+                uiRatio,
+              // width 375 且transform_scale(0.5)时 弹窗高度
+              // 1285 / 2 + 43 layer_ifame的header高度
+              // 642.5 + 43 = 685.5 = 686
+              bgWidth: (750 - border * 2) * uiRatio,
+              bgHeight: ((750 - border * 2) / 2) * 3 * uiRatio,
+
+              data: "",
+              canvas: "",
+              bg: "",
+
+              logo: "",
+              phone: "",
+              name: "",
+              qrcode: "",
+
+              txts: [],
+              imgs: [],
+            };
+          },
+          methods: {
+            // 初始化
+            init: async function () {
+              var _this = this;
+              // 获取当前浏览器缓存的要预览的数据
+              await this.getSessionStorageData();
+              // 初始化画布相关
+              this.initCanvas();
+              this.drawBg();
+              this.drawMsg();
+
+              // 文字和图片
+              var arr = [].concat(_this.data.img_info, _this.data.text_info);
+              // 从小到大排列z-index
+              arr.sort(function (o1, o2) {
+                return (
+                  parseInt(o1.opt.tpIndex.replace(/tp-img-|tp-txt-/, "")) -
+                  parseInt(o2.opt.tpIndex.replace(/tp-img-|tp-txt-/, ""))
+                );
+              });
+              // 按顺序绘制
+              for (var i in arr) {
+                if (arr[i].opt.tpIndex.indexOf("tp-img-") === 0) {
+                  await _this.addDrawImg(arr[i].src, arr[i].opt);
+                } else {
+                  _this.drawTxt(arr[i].txt, arr[i].opt);
+                }
+              }
+            },
+            // 获取当前浏览器缓存的要预览的数据
+            getSessionStorageData: function () {
+              this.data = JSON.parse(
+                sessionStorage.getItem("posterTemplateDetail")
+              );
+              if (!this.data) {
+                sessionStorage.setItem(
+                  "posterTemplateDetail",
+                  JSON.stringify({
+                    id: 13,
+                    poster_img_id: 167,
+                    text_info: [
+                      {
+                        txt: "大鱼\n     海棠",
+                        opt: {
+                          tpIndex: "tp-txt-3",
+                          top: 24.87085201793724,
+                          left: 5.501777777777761,
+                          opacity: 1,
+                          angle: 0,
+                          scaleX: 1,
+                          scaleY: 1,
+                          flipX: false,
+                          flipY: false,
+                          fontSize: "56",
+                          fontWeight: "normal",
+                          fontStyle: "normal",
+                          underline: false,
+                          linethrough: false,
+                          textAlign: "left",
+                          charSpacing: "100",
+                          lineHeight: "1.3",
+                          fill: "rgb(255,255,255)",
+                        },
+                      },
+                    ],
+                    img_info: [
+                      {
+                        src:
+                          "https://osstest.dg-mall.com/tongmeng/haibao/20200610/EmMapCFh4w.jpg",
+                        opt: {
+                          tpIndex: "tp-img-1",
+                          // top: -2.028665133776144,
+                          // left: -1.7723069269022176,
+                          top: 20,
+                          left: 20,
+                          tpRadius: 0,
+                          opacity: 1,
+                          angle: 0,
+                          scaleX: 2.003190174167183,
+                          scaleY: 1.850530974244925,
+                          flipX: false,
+                          flipY: false,
+                        },
+                      },
+                      {
+                        src:
+                          "https://osstest.dg-mall.com/tongmeng/haibao/20200610/ZfRSfFSPWA.jpg",
+                        opt: {
+                          tpIndex: "tp-img-2",
+                          top: 344.68688365542533,
+                          left: 224.4084444444446,
+                          tpRadius: 100,
+                          opacity: 1,
+                          angle: 0,
+                          scaleX: 0.42101042150509044,
+                          scaleY: 0.42101042150509044,
+                          flipX: false,
+                          flipY: false,
+                        },
+                      },
+                      {
+                        src:
+                          "https://osstest.dg-mall.com/tongmeng/haibao/20200707/SptQBFX7WF.gif",
+                        opt: {
+                          tpIndex: "tp-img-4",
+                          top: 417.0419282511212,
+                          left: 215.00000000000009,
+                          tpRadius: 100,
+                          opacity: 1,
+                          angle: 0,
+                          scaleX: 0.685696386177789,
+                          scaleY: 0.685696386177789,
+                          flipX: false,
+                          flipY: false,
+                        },
+                      },
+                    ],
+                    preview_url: "tongmeng/haibao/20210407/A5brc3RJA3.jpg",
+                    poster_img:
+                      "https://osstest.dg-mall.com/tongmeng/haibao/20190813/WFiE58mKyh.jpg",
+                  })
+                );
+                this.data = JSON.parse(
+                  sessionStorage.getItem("posterTemplateDetail")
+                );
+              }
+            },
+            // 初始化画布
+            initCanvas() {
+              this.canvas = new fabric.Canvas(
+                document.getElementsByClassName("tp-preview-canvas")[0],
+                {
+                  imageSmoothingEnabled: false, // 不使用图片平滑处理
+                  fill: "#fff",
+                  backgroundColor: "#fff",
+                  selection: false, // 不可拖拽选择 不可组选择
+                  width: this.canvasWidth,
+                  height: this.canvasHeight,
+                }
+              );
+            },
+            // 画背景
+            drawBg: function () {
+              var _this = this;
+              console.log(this);
+              console.log(this.data);
+              console.log(this.data.poster_img);
+              var val = this.data.poster_img;
+              fabric.Image.fromURL(
+                val,
+                function (bg) {
+                  bg.set({
+                    top: _this.border,
+                    left: _this.border,
+                    centeredScaling: true,
+                    opacity: 1,
+                    selectable: false,
+                    evented: false,
+                  });
+                  bg.scaleToWidth(_this.bgWidth);
+                  bg.scaleToHeight(_this.bgHeight);
+                  _this.bg = bg;
+                  // 绘制
+                  _this.canvas.setBackgroundImage(bg);
+                  _this.canvas.renderAll();
+                },
+                {
+                  crossOrigin: "anonymous",
+                }
+              );
+            },
+            // 画文字
+            drawTxt: function (txt, initOptions) {
+              var _this = this;
+              initOptions.selectable = false;
+              initOptions.shadow = "2px 2px 20px rgba(0,0,0,0.5)";
+              var oTxt = new fabric.IText(txt, initOptions);
+              _this.canvas.add(oTxt);
+              _this.canvas.renderAll();
+              _this.txts.push(oTxt);
+            },
+            // 画图片
+            addDrawImg: function (val, initOptions) {
+              var _this = this;
+              return new Promise(function (resolve, reject) {
+                try {
+                  fabric.Image.fromURL(
+                    val,
+                    function (img) {
+                      initOptions.selectable = false;
+                      img.set(initOptions);
+                      if (initOptions.tpRadius) {
+                        img
+                          .set({
+                            clipPath: new fabric.Rect({
+                              // 圆角
+                              top: 0,
+                              left: 0,
+                              originX: "center",
+                              originY: "center",
+                              width: img.width,
+                              height: img.height,
+                              rx: initOptions.tpRadius, // 圆角半径
+                              ry: initOptions.tpRadius, // 圆角半径
+                            }),
+                          })
+                          .setCoords();
+                      }
+                      _this.canvas.add(img);
+                      _this.canvas.renderAll();
+                      _this.imgs.push(img);
+                      resolve();
+                    }.bind(this),
+                    {
+                      crossOrigin: "anonymous",
+                    }
+                  );
+                } catch (error) {
+                  console.log(error);
+                  reject();
+                }
+              });
+            },
+            // 画底部信息
+            drawMsg: function () {
+              var _this = this;
+              // 公司logo
+              fabric.Image.fromURL(
+                // "/admin/images/posterTemplateSet/dg_logo@3x.png",
+                // "https://tongmeng.dg-tom.com/admin/images/posterTemplateSet/dg_logo@3x.png",
+                "./img/dg_logo@3x.png",
+                function (logo) {
+                  logo.set({
+                    top: _this.canvasHeight - 180 * uiRatio + _this.border,
+                    left: _this.border,
+                    selectable: false,
+                  });
+                  logo.scaleToWidth(182 * uiRatio);
+                  logo.scaleToHeight(52 * uiRatio);
+                  _this.logo = logo;
+                  // 绘制
+                  if (_this.logo) _this.canvas.remove(_this.logo);
+                  _this.canvas.add(logo);
+                  _this.canvas.renderAll();
+                },
+                {
+                  crossOrigin: "anonymous",
+                }
+              );
+              // 代理商手机号
+              if (_this.phone) _this.canvas.remove(_this.phone);
+              _this.phone = new fabric.Text("代理商手机号", {
+                top:
+                  _this.canvasHeight -
+                  180 * uiRatio +
+                  _this.border +
+                  (52 + 24) * uiRatio,
+                left: _this.border,
+                fontSize: 30 * uiRatio,
+                fill: "#444",
+                selectable: false,
+              });
+              _this.canvas.add(_this.phone);
+              _this.canvas.renderAll();
+              // 代理商姓名
+              if (_this.name) _this.canvas.remove(_this.name);
+              _this.name = new fabric.Text("代理商姓名", {
+                top:
+                  _this.canvasHeight -
+                  180 * uiRatio +
+                  _this.border +
+                  (52 + 24) * uiRatio +
+                  (30 + 22) * uiRatio,
+                left: _this.border,
+                fontSize: 30 * uiRatio,
+                fill: "#444",
+                selectable: false,
+              });
+              _this.canvas.add(_this.name);
+              _this.canvas.renderAll();
+              // 二维码占位
+              fabric.Image.fromURL(
+                // "/admin/images/posterTemplateSet/qrcode.png",
+                // "https://tongmeng.dg-tom.com/admin/images/posterTemplateSet/qrcode.png",
+                "./img/qrcode.png",
+                function (qrcode) {
+                  qrcode.set({
+                    top: _this.canvasHeight - 180 * uiRatio + 18 * uiRatio,
+                    left: _this.canvasWidth - _this.border - 144 * uiRatio,
+                    selectable: false,
+                  });
+                  qrcode.scaleToWidth(144 * uiRatio);
+                  qrcode.scaleToHeight(144 * uiRatio);
+                  _this.qrcode = qrcode;
+                  // 绘制
+                  if (_this.qrcode) _this.canvas.remove(_this.qrcode);
+                  _this.canvas.add(qrcode);
+                  _this.canvas.renderAll();
+                },
+                {
+                  crossOrigin: "anonymous",
+                }
+              );
+            },
+          },
+          mounted: function () {
+            this.init();
+          },
+        });
+      })();
+    </script>
+  </body>
+</html>

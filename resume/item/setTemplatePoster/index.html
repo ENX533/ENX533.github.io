@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
+    <meta
+      name="csrf-token"
+      content="DLb2oReGAnaM0eUfym7RWORIYE6AyvYl8P9x2V8p"
+    />
+    <title>模板海报设置</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/admin/css/cropper.css" /> -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://tongmeng.dg-tom.com/admin/css/cropper.css"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="/common/css/spectrum.css" /> -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://tongmeng.dg-tom.com/common/css/spectrum.css"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="/admin/css/posterTemplateSet/index.css" /> -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://tongmeng.dg-tom.com/admin/css/posterTemplateSet/index.css"
+    />
+  </head>
+  <body>
+    <div
+      id="template-poster-add"
+      class="template-poster-add"
+      :style="{height: (44 + 79 + canvasHeight + 35) + 'px'}"
+    >
+      <div class="tp-con">
+        <!-- 顶部 操作栏 -->
+        <div class="tp-top" @click.stop="">
+          <div class="tp-top-l">
+            <div
+              class="tp-top-l-btn"
+              :class="{disabled: !aActionRecord.length}"
+              @click="topCtrlCancel"
+            >
+              <svg
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                data-spm-anchor-id="a313x.7781069.1998910419.i2"
+              >
+                <path
+                  d="M628.5 860.9h-419c-12.8 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h418.9c115.5 0 209.5-94 209.5-209.5s-94-209.5-209.5-209.5H209.5c-12.8 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h418.9c68.4 0 132.7 26.6 181 75 48.3 48.4 75 112.6 75 181s-26.6 132.7-75 181c-48.3 48.6-112.6 75.2-180.9 75.2zM324.5 532.2c-6 0-11.9-2.3-16.5-6.8L168.4 385.8c-4.4-4.4-6.8-10.3-6.8-16.5s2.5-12.1 6.8-16.5L308 213.3c9.1-9.1 23.8-9.1 32.9 0 9.1 9.1 9.1 23.8 0 32.9L217.8 369.3 341 492.5c9.1 9.1 9.1 23.8 0 32.9-4.6 4.6-10.6 6.8-16.5 6.8z"
+                ></path>
+              </svg>
+              <span>上一步</span>
+            </div>
+            <div class="tp-top-l-btn" @click="topCtrlReload">
+              <svg
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M508.66015625 821.90234375c-41.66015625 0-82.00195313-8.17382813-120.05859375-24.2578125-36.73828125-15.55664063-69.69726563-37.79296875-97.99804688-66.09375s-50.53710938-61.25976563-66.09374999-97.99804688c-16.08398438-38.05664063-24.2578125-78.3984375-24.2578125-120.05859374s8.17382813-82.00195313 24.2578125-120.05859375c15.55664063-36.73828125 37.79296875-69.69726563 66.09375-97.99804688s61.25976563-50.53710938 97.99804687-66.09375c38.05664063-16.08398438 78.3984375-24.2578125 120.05859375-24.2578125 66.18164063 0 129.28710938 20.65429688 182.4609375 59.765625 4.39453125 3.25195313 8.87695313 6.6796875 13.09570313 10.1953125 10.10742188 8.34960938 11.6015625 23.29101563 3.25195312 33.3984375s-23.29101563 11.6015625-33.3984375 3.25195313c-3.60351563-2.98828125-7.3828125-5.88867188-11.07421875-8.61328125-45-33.046875-98.34960938-50.53710938-154.3359375-50.53710938-143.87695313 0-260.94726563 117.0703125-260.94726563 260.94726563s117.0703125 260.94726563 260.94726563 260.94726562 260.94726563-117.0703125 260.94726563-260.94726563c0-13.09570313 10.63476563-23.73046875 23.73046874-23.73046874s23.73046875 10.63476563 23.73046875 23.73046875c0 41.66015625-8.17382813 82.00195313-24.2578125 120.05859374-15.55664063 36.73828125-37.79296875 69.69726563-66.09374999 97.99804688s-61.25976563 50.53710938-97.99804688 66.09375c-37.96875 16.08398438-78.3984375 24.2578125-120.05859375 24.2578125z"
+                ></path>
+                <path
+                  d="M581.609375 348.875c-10.72265625 0-20.390625-7.29492188-23.02734375-18.19335938-3.07617188-12.74414063 4.74609375-25.57617188 17.49023438-28.65234374l92.63671874-22.32421876-11.42578125-102.56835937c-1.49414063-13.0078125 7.91015625-24.78515625 20.91796875-26.19140625 13.0078125-1.49414063 24.78515625 7.91015625 26.19140625 20.91796875l13.7109375 123.3984375c1.31835938 11.86523438-6.41601563 22.93945313-18.01757812 25.6640625l-113.02734375 27.24609375c-1.7578125 0.43945313-3.60351563 0.703125-5.44921875 0.703125z"
+                ></path>
+              </svg>
+              <span>重做</span>
+            </div>
+          </div>
+          <div class="tp-top-r">
+            <div class="tp-top-r-btn" @click="topCtrlPreview">
+              <svg
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M512 192C288.704 192 95.104 322.048 0 512c95.104 189.952 288.704 320 512 320s416.896-130.048 512-320C928.896 322.048 735.296 192 512 192zM416 313.984c53.056 0 96 43.008 96 96 0 53.056-42.944 96-96 96S320 463.04 320 409.984C320 356.992 362.944 313.984 416 313.984zM764.416 662.336C688.896 710.528 601.536 736 512 736s-176.896-25.472-252.416-73.664C199.424 623.936 148.416 572.48 110.144 512c38.272-60.48 89.28-111.936 149.44-150.336 3.904-2.496 7.872-4.928 11.84-7.296C261.44 381.696 256 411.2 256 441.984c0 141.376 114.624 256 256 256s256-114.624 256-256c0-30.784-5.44-60.224-15.424-87.552 3.968 2.368 7.936 4.736 11.84 7.232 60.16 38.4 111.168 89.792 149.44 150.336C875.584 572.48 824.576 623.936 764.416 662.336z"
+                ></path>
+              </svg>
+              <span>预览</span>
+            </div>
+            <div class="tp-top-r-btn" @click="topCtrlSave">
+              <svg
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M704 128H192c-35.2 0-64 28.8-64 64v640c0 35.2 28.8 64 64 64h640c35.2 0 64-28.8 64-64V320L704 128zM256 256h320v128H256V256z m256 512c-70.4 0-128-57.6-128-128s57.6-128 128-128 128 57.6 128 128-57.6 128-128 128z"
+                ></path>
+              </svg>
+              <span>保存</span>
+            </div>
+            <div class="tp-top-r-btn" @click="topCtrlShutdown">
+              <svg
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M511.968 376.224 796.096 92.096C833.536 54.624 894.4 54.624 931.84 92.096 969.312 129.568 969.312 190.4 931.84 227.872L647.744 512 931.84 796.096C969.312 833.568 969.312 894.4 931.84 931.872 894.4 969.344 833.536 969.344 796.096 931.872L511.968 647.744 227.84 931.872C190.4 969.344 129.536 969.344 92.096 931.872 54.624 894.4 54.624 833.568 92.096 796.096L376.224 512 92.096 227.872C54.624 190.4 54.624 129.568 92.096 92.096 129.536 54.624 190.4 54.624 227.84 92.096L511.968 376.224Z"
+                ></path>
+              </svg>
+              <span>关闭</span>
+            </div>
+          </div>
+        </div>
+        <!-- 左侧边栏 内容层 -->
+        <div class="tp-left" @click.stop="">
+          <!-- 左侧边栏 菜单 -->
+          <div class="tp-left-menu">
+            <ul>
+              <li
+                class="tp-left-menu-li"
+                :class="{active: sLeftView === 'txt'}"
+                @click="sLeftView = 'txt'; bLeftItemsHide = false"
+              >
+                <div class="tp-icon">
+                  <svg
+                    style="
+                      width: 1em;
+                      height: 1em;
+                      vertical-align: middle;
+                      fill: currentColor;
+                      overflow: hidden;
+                    "
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M921.6 0H204.8v102.4h716.8v716.8h102.4V0h-102.4zM0 1024h819.2V204.8H0zM153.6 358.4h512v102.4H460.8v409.6H358.4V460.8H153.6z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="tp-txt">文字</div>
+              </li>
+              <li
+                class="tp-left-menu-li"
+                :class="{active: sLeftView === 'img'}"
+                @click="sLeftView = 'img'; bLeftItemsHide = false"
+              >
+                <div class="tp-icon">
+                  <svg
+                    style="
+                      width: 1em;
+                      height: 1em;
+                      vertical-align: middle;
+                      fill: currentColor;
+                      overflow: hidden;
+                    "
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1004.488 930.504c-13.04 13.04-28.664 19.576-46.936 19.576L292.912 950.08c-18.272 0-33.904-6.536-46.936-19.576-13-13.08-19.52-28.752-19.52-47.088L226.456 376.864c0-18.328 6.52-33.992 19.52-47.056 13.024-13.04 28.664-19.576 46.936-19.576l664.632 0c18.272 0 33.896 6.536 46.936 19.576 13 13.072 19.512 28.728 19.512 47.056l0 506.544C1024 901.752 1017.488 917.424 1004.488 930.504zM970.832 376.888c0-3.624-1.328-6.744-3.968-9.368-2.624-2.648-5.744-3.952-9.352-3.952L292.912 363.568c-3.608 0-6.728 1.304-9.344 3.952-2.624 2.64-3.944 5.744-3.944 9.368l0 506.56c0 3.584 1.32 6.712 3.944 9.336 2.648 2.656 5.736 3.976 9.344 3.976l664.6 0c3.608 0 6.728-1.32 9.352-3.976 2.64-2.624 3.968-5.752 3.968-9.336L970.832 376.888zM332.816 763.456 465.712 630.16l66.456 66.664 212.672-213.296 172.816 173.28 0 186.64L332.816 843.448 332.816 763.456zM412.56 576.824c-22.168 0-40.992-7.752-56.488-23.32-15.52-15.536-23.264-34.432-23.264-56.64 0-22.232 7.736-41.104 23.264-56.656 15.496-15.544 34.32-23.328 56.488-23.328 22.144 0 40.984 7.784 56.48 23.328 15.496 15.552 23.256 34.424 23.256 56.656 0 22.208-7.76 41.104-23.256 56.64C453.544 569.072 434.704 576.824 412.56 576.824zM852.68 258.736c0-3.616-1.32-6.736-3.968-9.368-2.624-2.656-5.744-3.952-9.344-3.952L174.76 245.416c-3.608 0-6.72 1.296-9.344 3.952-2.624 2.632-3.944 5.744-3.944 9.368l0 506.552c0 3.584 1.32 6.712 3.944 9.336 2.648 2.656 5.736 3.984 9.344 3.984l12.32 0 0 23.84c0 10.424 2.072 20.36 5.752 29.464l-18.072 0c-18.272 0-33.904-6.536-46.928-19.576-13.008-13.08-19.52-28.752-19.52-47.088L108.312 258.712c0-18.328 6.512-33.992 19.52-47.056 13.024-13.032 28.664-19.576 46.928-19.576l664.632 0c18.272 0 33.896 6.536 46.936 19.576 13 13.072 19.512 28.728 19.512 47.056l0 12.056-53.168 0L852.672 258.736zM744.376 140.584c0-3.624-1.328-6.744-3.968-9.368-2.624-2.648-5.744-3.944-9.352-3.944L66.456 127.272c-3.616 0-6.728 1.296-9.344 3.952-2.624 2.64-3.944 5.744-3.944 9.368l0 506.552c0 3.592 1.32 6.72 3.944 9.344 2.648 2.648 5.736 3.976 9.344 3.976l12.32 0 0 23.84c0 10.432 2.072 20.36 5.752 29.464L66.456 713.768c-18.272 0-33.904-6.528-46.936-19.568C6.52 681.12 0 665.448 0 647.112L0 140.56c0-18.328 6.52-33.992 19.52-47.056 13.024-13.04 28.664-19.576 46.936-19.576l664.632 0c18.272 0 33.896 6.536 46.928 19.576 13 13.072 19.52 28.728 19.52 47.056l0 12.056-53.168 0L744.368 140.584z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="tp-txt">图片</div>
+              </li>
+              <li
+                class="tp-left-menu-li"
+                :class="{active: sLeftView === 'bg'}"
+                @click="sLeftView = 'bg'; bLeftItemsHide = false"
+              >
+                <div class="tp-icon">
+                  <svg
+                    style="
+                      width: 1em;
+                      height: 1em;
+                      vertical-align: middle;
+                      fill: currentColor;
+                      overflow: hidden;
+                    "
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M888.021333 127.189333H136.021333c-39.637333 0-72.021333 32.426667-72.021333 72.021334v625.493333c0 39.594667 32.426667 71.978667 72.021333 71.978667h752c39.594667 0 71.978667-32.384 71.978667-71.978667V199.210667c0-39.594667-32.426667-72.021333-72.021333-72.021334z m0 697.301334l-0.128 0.128H136.192l-0.085333-0.128v-212.778667l185.6-189.824 217.301333 269.909333a35.968 35.968 0 0 0 47.189333 5.973334l160.512-108.458667 141.269334 66.474667v168.704z m0-259.285334l-118.101333-48.725333a35.882667 35.882667 0 0 0-42.026667-1.194667l-155.776 105.130667-222.122666-275.2a36.138667 36.138667 0 0 0-52.778667-1.408l-161.194667 164.906667V199.253333l0.085334-0.085333h751.701333l0.085333 0.085333 0.128 365.909334z m-190.037333-292.224a101.12 101.12 0 0 0-100.992 101.034667 101.12 101.12 0 0 0 100.992 100.992 101.12 101.12 0 0 0 101.034667-100.992 101.12 101.12 0 0 0-101.034667-101.034667z m0 130.005334a29.013333 29.013333 0 1 1 0.042667-58.026667 29.013333 29.013333 0 0 1 0 58.026667z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="tp-txt">背景</div>
+              </li>
+            </ul>
+          </div>
+          <!-- 左侧边栏 内容 -->
+          <div class="tp-left-items" :class="{hide: bLeftItemsHide}">
+            <!-- 文字列表 -->
+            <div class="tp-left-item tp-txt-view" v-show="sLeftView === 'txt'">
+              <div class="tp-add-btn" @click="drawTxt('添加正文')">
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M900.7 432.2H548.4V109.3c0-20.2-16.5-36.7-36.7-36.7-20.2 0-36.7 16.5-36.7 36.7v322.9H122.8c-20.2 0-36.7 16.5-36.7 36.7 0 20.2 16.5 36.7 36.7 36.7h352.3v381.6c0 20.2 16.5 36.7 36.7 36.7 20.2 0 36.7-16.5 36.7-36.7V505.6h352.3c20.2 0 36.7-16.5 36.7-36.7-0.1-20.2-16.6-36.7-36.8-36.7z"
+                  ></path>
+                </svg>
+                <span>添加正文</span>
+              </div>
+              <div
+                class="tp-txt-item"
+                v-for="(item, key) in aLeftTxt"
+                :key="key"
+              >
+                <div
+                  class="tp-txt-placeholder"
+                  v-text="item"
+                  @click="drawTxt(item)"
+                ></div>
+                <!-- <textarea :ref="'textarea-' + key" v-model="item" @input="onChangeTxt(item, key)"></textarea> -->
+              </div>
+            </div>
+            <!-- 图片列表 -->
+            <div class="tp-left-item tp-img-view" v-show="sLeftView === 'img'">
+              <div class="tp-add-btn">
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M900.7 432.2H548.4V109.3c0-20.2-16.5-36.7-36.7-36.7-20.2 0-36.7 16.5-36.7 36.7v322.9H122.8c-20.2 0-36.7 16.5-36.7 36.7 0 20.2 16.5 36.7 36.7 36.7h352.3v381.6c0 20.2 16.5 36.7 36.7 36.7 20.2 0 36.7-16.5 36.7-36.7V505.6h352.3c20.2 0 36.7-16.5 36.7-36.7-0.1-20.2-16.6-36.7-36.8-36.7z"
+                  ></path>
+                </svg>
+                <span>添加图片</span>
+                <!-- <input type="file" accept="image/*" @change="onUploadAddImg"> -->
+                <input
+                  type="file"
+                  accept="image/png,image/jpg,image/jpeg"
+                  @change="onUploadAddImg"
+                />
+              </div>
+              <!-- 第一版不做 数据库里素材表 还没建立 -->
+              <!-- <div class="tp-img-item" v-for="(item, key) in aLeftImg" :key="key">
+                <img :src="item">
+              </div> -->
+            </div>
+            <!-- 背景列表 -->
+            <div class="tp-left-item tp-bg-view" v-show="sLeftView === 'bg'">
+              <div
+                class="tp-bg-item"
+                v-for="(item, key) in aLeftBg"
+                :key="key"
+                @click="selectBg(item)"
+              >
+                <img :src="aliossHost + item.poster_img[0]" />
+                <p class="tp-bg-name" v-text="item.title"></p>
+              </div>
+            </div>
+            <!-- 隐藏侧边栏 -->
+            <div
+              class="tp-hide-items"
+              @click="bLeftItemsHide = !bLeftItemsHide"
+            >
+              <svg
+                :class="{reversi: bLeftItemsHide}"
+                style="
+                  width: 1em;
+                  height: 1em;
+                  vertical-align: middle;
+                  fill: currentColor;
+                  overflow: hidden;
+                "
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M377.052007 512l386.3073-388.203486L705.12909 65.290005 318.845327 453.493491l-58.20668 58.506509 58.20668 58.505485 386.283764 388.203486 58.230216-58.506509L377.052007 512zM377.052007 512"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- 中间 显示层 -->
+        <div class="tp-center" :style="{height: canvasHeight + 'px'}">
+          <div
+            class="tp-canvas-con"
+            :style="{width: canvasWidth + 'px', height: canvasHeight + 'px', transform: 'translate(-50%, 0) scale(1)'}"
+            @click.stop=""
+          >
+            <canvas class="tp-canvas"></canvas>
+          </div>
+        </div>
+        <!-- 右边 编辑层 -->
+        <div class="tp-right" @click.stop="hideSortControl">
+          <!-- 右边 编辑层 当显示层中啥都没选中 -->
+          <div
+            class="tp-selecting-item tp-selecting-nothing"
+            v-show="nowSelect === ''"
+          >
+            <div class="tp-r-nothing-tips">画布比例 2:3</div>
+            <div class="tp-r-btn">
+              <span>上传本地图片</span>
+              <input
+                type="file"
+                accept="image/png,image/jpg,image/jpeg"
+                @change="onUploadAddImg"
+              />
+            </div>
+          </div>
+          <!-- 右边 编辑层 当显示层中选中文字 -->
+          <div
+            class="tp-selecting-item tp-selecting-txt"
+            v-show="nowSelect === 'txt'"
+          >
+            <div class="tp-r-range">
+              <span class="label">字体大小</span>
+              <input
+                class="range"
+                type="range"
+                :min="txtSettingConfig.minFontSize"
+                :max="txtSettingConfig.maxFontSize"
+                step="1"
+                v-model="nowFontSize"
+                @mousedown="rangeMouseDown($event, 'txt_fontSize')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="showFontSize"></span>
+            </div>
+            <div
+              title="修改字体颜色"
+              class="tp-r-color-pick"
+              @mouseup="colorPickMouseUp"
+            >
+              <input type="text" id="picker" />
+            </div>
+            <div class="tp-r-icons">
+              <!-- 加粗 -->
+              <div
+                :title="nowFontWeight === 'bold' ? '取消加粗' : '加粗'"
+                class="tp-r-icon-item"
+                :class="{active: nowFontWeight === 'bold'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'fontWeight', nowFontWeight === 'normal' ? 'bold' : 'normal', nowFontWeight); nowFontWeight = nowFontWeight === 'normal' ? 'bold' : 'normal'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M582.83 125.77c78.2 0 138.52 17.89 183.23 55.86 42.43 35.75 63.66 83.8 63.66 145.25 0 44.68-11.16 82.66-33.5 113.95-22.34 29.05-52.52 51.39-92.73 65.91 52.5 10.05 92.73 31.27 119.52 63.68 26.82 32.39 40.23 75.95 40.23 129.59 0 80.43-27.93 138.52-82.66 176.5-46.93 31.3-112.84 46.93-197.75 46.93h-364.2V125.77h364.2zM340.4 464.29h210.02c55.86 0 96.09-10.07 120.66-29.05 24.59-20.11 36.86-51.39 36.86-93.84 0-40.23-12.27-69.27-36.86-87.16-24.57-18.98-64.8-27.91-118.41-27.91H340.4v237.96z m0 358.62h225.68c51.39 0 91.59-8.93 120.64-24.57 35.75-21.23 54.75-54.75 54.75-100.57 0-46.91-14.52-81.55-42.45-102.77-27.93-21.23-71.5-31.27-129.59-31.27H340.4v259.18z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 斜体 -->
+              <div
+                :title="nowFontStyle === 'italic' ? '取消斜体' : '斜体'"
+                class="tp-r-icon-item"
+                :class="{active: nowFontStyle === 'italic'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'fontStyle', nowFontStyle === 'normal' ? 'italic' : 'normal', nowFontStyle); nowFontStyle = nowFontStyle === 'normal' ? 'italic' : 'normal'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 217.10427a33.048659 33.048659 0 0 0-7.118173-33.048659 92.027805 92.027805 0 0 0-47.285005-15.253228 17.286991 17.286991 0 0 1-15.761668-16.270109 26.438928 26.438928 0 0 1 0-7.118173v-9.660377q33.5571 3.559086 66.097319 5.084409t60.504468 0h56.945383q33.5571 0 63.555114-5.084409a94.061569 94.061569 0 0 1 0 16.77855 14.744786 14.744786 0 0 1-15.761668 16.77855 107.789474 107.789474 0 0 0-50.844092 15.761669 53.894737 53.894737 0 0 0-18.812314 33.5571L498.780536 791.642502a31.014896 31.014896 0 0 0 7.626614 32.540219 112.365442 112.365442 0 0 0 50.844091 15.761668 16.270109 16.270109 0 0 1 14.744787 16.77855 96.095333 96.095333 0 0 1 0 17.795432q-33.5571-3.559086-68.131083-5.084409H384.889772q-33.048659 0-63.046674 5.084409a96.095333 96.095333 0 0 1 0-17.795432 14.236346 14.236346 0 0 1 13.219464-15.761668 131.686197 131.686197 0 0 0 50.844091-16.270109 50.844091 50.844091 0 0 0 20.337637-33.04866z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 下划线 -->
+              <div
+                :title="nowFontUnderline ? '取消下划线' : '下划线'"
+                class="tp-r-icon-item"
+                :class="{active: nowFontUnderline}"
+                @click="addActionRecord('txt', nowSelectIndex, 'underline', !nowFontUnderline, nowFontUnderline); nowFontUnderline = !nowFontUnderline"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M512 800A288.64 288.64 0 0 1 224 512V128a32 32 0 0 1 64 0v384a224 224 0 0 0 448 0V128a32 32 0 0 1 64 0v384A288.64 288.64 0 0 1 512 800zM864 928h-704a32 32 0 0 1 0-64h704a32 32 0 0 1 0 64z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 删除线 -->
+              <div
+                :title="nowFontLinethrough ? '取消删除线' : '删除线'"
+                class="tp-r-icon-item"
+                :class="{active: nowFontLinethrough}"
+                @click="addActionRecord('txt', nowSelectIndex, 'linethrough', !nowFontLinethrough, nowFontLinethrough); nowFontLinethrough = !nowFontLinethrough"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M756.037818 539.624727c61.998545 40.634182 93.486545 96.977455 93.486546 169.053091 0 71.493818-30.487273 128.954182-90.274909 171.194182-57.437091 39.796364-133.632 59.764364-228.584728 59.764364-96.116364 0-172.334545-22.272-227.421091-65.629091-63.301818-50.408727-98.443636-126.650182-105.495272-227.421091h70.330181c8.215273 78.498909 35.165091 137.146182 82.059637 175.825454 42.193455 34.001455 102.004364 51.595636 179.362909 51.595637 73.844364 0 133.632-15.290182 179.339636-43.426909 44.544-29.253818 68.002909-69.12 68.002909-118.365091 0-57.437091-29.323636-101.981091-85.597091-133.632-18.338909-10.705455-50.641455-23.901091-97.256727-38.958546H221.090909a34.909091 34.909091 0 0 1 0-69.818182h145.105455c-22.853818-8.448-39.959273-15.965091-51.2-22.528-64.512-36.328727-96.162909-89.088-96.162909-157.044363 0-72.680727 29.323636-127.790545 90.298181-166.469818C363.008 87.412364 433.338182 69.818182 517.748364 69.818182c91.461818 0 164.119273 22.272 218.018909 66.816 55.109818 44.544 86.760727 110.173091 93.789091 196.957091h-71.517091c-9.355636-65.629091-33.978182-114.874182-73.844364-148.875637-39.866182-34.001455-96.116364-50.408727-168.797091-50.408727-68.002909 0-120.738909 11.729455-159.418182 35.141818-44.544 25.832727-65.629091 65.675636-65.629091 118.411637 0 46.917818 25.762909 83.223273 78.49891 111.36 24.669091 11.729455 78.545455 30.510545 160.628363 53.922909 20.014545 5.725091 38.772364 11.264 56.32 16.663272H826.181818a34.909091 34.909091 0 0 1 0 69.818182h-70.144z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="tp-r-icons">
+              <!-- 左对齐 -->
+              <div
+                title="左对齐"
+                class="tp-r-icon-item"
+                :class="{active: nowFontTextAlign === 'left'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'textAlign', 'left', nowFontTextAlign); nowFontTextAlign = 'left'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M936.1 236.4H86.6c-12.8 0-23.2-10.4-23.2-23.2 0-12.8 10.4-23.2 23.2-23.2h849.5c12.8 0 23.2 10.4 23.2 23.2 0 12.8-10.4 23.2-23.2 23.2zM750.3 435.5H86.6c-12.8 0-23.2-10.4-23.2-23.2 0-12.8 10.4-23.2 23.2-23.2h663.7c12.8 0 23.2 10.4 23.2 23.2 0 12.8-10.4 23.2-23.2 23.2zM936.1 634.6H86.6c-12.8 0-23.2-10.4-23.2-23.2s10.4-23.2 23.2-23.2h849.5c12.8 0 23.2 10.4 23.2 23.2s-10.4 23.2-23.2 23.2zM750.3 833.7H86.6c-12.8 0-23.2-10.4-23.2-23.2 0-12.8 10.4-23.2 23.2-23.2h663.7c12.8 0 23.2 10.4 23.2 23.2 0 12.8-10.4 23.2-23.2 23.2z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 居中对齐 -->
+              <div
+                title="居中对齐"
+                class="tp-r-icon-item"
+                :class="{active: nowFontTextAlign === 'center'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'textAlign', 'center', nowFontTextAlign); nowFontTextAlign = 'center'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M935.3 238H90.7c-12.8 0-23.1-10.3-23.1-23.1s10.3-23.1 23.1-23.1h844.6c12.8 0 23.1 10.3 23.1 23.1 0 12.7-10.4 23.1-23.1 23.1zM842.9 435.9H183.1c-12.8 0-23.1-10.3-23.1-23.1s10.3-23.1 23.1-23.1h659.8c12.8 0 23.1 10.3 23.1 23.1s-10.3 23.1-23.1 23.1zM935.3 633.9H90.7c-12.8 0-23.1-10.3-23.1-23.1s10.3-23.1 23.1-23.1h844.6c12.8 0 23.1 10.3 23.1 23.1s-10.4 23.1-23.1 23.1zM842.9 831.8H183.1c-12.8 0-23.1-10.3-23.1-23.1s10.3-23.1 23.1-23.1h659.8c12.8 0 23.1 10.3 23.1 23.1s-10.3 23.1-23.1 23.1z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 右对齐 -->
+              <div
+                title="右对齐"
+                class="tp-r-icon-item"
+                :class="{active: nowFontTextAlign === 'right'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'textAlign', 'right', nowFontTextAlign); nowFontTextAlign = 'right'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M937.1 235.9H85.6c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h851.5c12.9 0 23.3 10.4 23.3 23.3s-10.5 23.3-23.3 23.3zM937.1 435.5H271.9c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h665.2c12.9 0 23.3 10.4 23.3 23.3s-10.5 23.3-23.3 23.3zM937.1 635.1H85.6c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h851.5c12.9 0 23.3 10.4 23.3 23.3 0 12.8-10.5 23.3-23.3 23.3zM937.1 834.6H271.9c-12.9 0-23.3-10.4-23.3-23.3S259 788 271.9 788h665.2c12.9 0 23.3 10.4 23.3 23.3s-10.5 23.3-23.3 23.3z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 两端对齐 免费赠送 -->
+              <!-- <div class="tp-r-icon-item" :class="{active: nowFontTextAlign === 'justify'}" @click="addActionRecord('txt', nowSelectIndex, 'textAlign', 'justify', nowFontTextAlign); nowFontTextAlign = 'justify'">
+                <svg style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M933.3 238.1h-844c-12.7 0-23.1-10.3-23.1-23.1 0-12.7 10.3-23.1 23.1-23.1h844c12.7 0 23.1 10.3 23.1 23.1s-10.3 23.1-23.1 23.1zM933.3 436h-844c-12.7 0-23.1-10.3-23.1-23.1 0-12.7 10.3-23.1 23.1-23.1h844c12.7 0 23.1 10.3 23.1 23.1 0 12.7-10.3 23.1-23.1 23.1zM933.3 633.8h-844c-12.7 0-23.1-10.3-23.1-23.1s10.3-23.1 23.1-23.1h844c12.7 0 23.1 10.3 23.1 23.1s-10.3 23.1-23.1 23.1zM933.3 831.6h-844c-12.7 0-23.1-10.3-23.1-23.1 0-12.7 10.3-23.1 23.1-23.1h844c12.7 0 23.1 10.3 23.1 23.1s-10.3 23.1-23.1 23.1z"></path></svg>
+              </div> -->
+              <!-- 两端对齐 末行居中 免费赠送 -->
+              <div
+                title="两端对齐 末行居中 用空格分隔"
+                class="tp-r-icon-item"
+                :class="{active: nowFontTextAlign === 'justify-center'}"
+                @click="addActionRecord('txt', nowSelectIndex, 'textAlign', 'justify-center', nowFontTextAlign); nowFontTextAlign = 'justify-center'"
+              >
+                <svg
+                  style="
+                    width: 1em;
+                    height: 1em;
+                    vertical-align: middle;
+                    fill: currentColor;
+                    overflow: hidden;
+                  "
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M939.1 231.2H85.5c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h853.6c12.9 0 23.3 10.4 23.3 23.3s-10.4 23.3-23.3 23.3zM939.1 431.3H85.5c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h853.6c12.9 0 23.3 10.4 23.3 23.3 0 12.8-10.4 23.3-23.3 23.3zM939.1 631.3H85.5c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h853.6c12.9 0 23.3 10.4 23.3 23.3s-10.4 23.3-23.3 23.3zM845.7 831.4H178.9c-12.9 0-23.3-10.4-23.3-23.3s10.4-23.3 23.3-23.3h666.9c12.9 0 23.3 10.4 23.3 23.3 0 12.8-10.5 23.3-23.4 23.3z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- 纵向输入。。做不到 -->
+              <!-- <div class="tp-r-icon-item">
+                <svg style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M96 694.9l128.1 136.6V64h64.6v767.7L416.8 695v94L256.4 960 96 789zM477.5 363.1c7.1 17.7 17.7 32.8 31.9 45.2-8.9 0-16.4 0.9-22.6 2.7-6.2 1.8-11.1 4.4-14.7 8l-0.1 63.9c8.9-7.1 17.8-12.5 26.7-16 8.9-3.6 18.7-5.4 29.3-5.4l146.5-0.2c32 0 56.8-9.9 74.6-29.4 17.8-19.6 26.7-48.9 26.8-87.9 0.1-35.5-8.4-64.3-25.2-86.5-16.9-22.2-39.5-35-67.9-38.5l-0.1 58.5c14.2 3.5 25.3 10.2 33.3 19.9 8 9.7 12 25.3 11.9 46.6 0 26.6-5.4 43.9-16.1 51.9-10.7 8-21.3 12-32 12-8.9 0-16-9.3-21.3-27.9-5.3-18.6-9.7-40.4-13.2-65.2-5.3-37.2-15.9-64.8-31.8-82.5-16-17.7-37.3-26.6-63.9-26.5-26.6 0-47.1 9.8-61.3 29.4-14.3 19.5-21.4 43.5-21.4 71.9 0 19.7 3.5 38.3 10.6 56z m49.4-86.5c8-8 17.3-12 28-12 12.4 0 23.1 4 32 11.9 8.9 8 15 25.3 18.6 51.9 3.5 23 6.6 39.5 9.2 49.2 2.6 9.7 5.7 20 9.3 30.6l-53.3 0.1c-19.5-10.6-33.7-25.2-42.6-43.8-8.9-18.6-13.3-35.9-13.2-51.9 0-16.1 4-28 12-36zM477.6 639.9c-7.1 14.2-10.7 31-10.7 50.6-0.1 35.5 12.8 65.6 38.5 90.4 25.7 24.8 64.3 37.2 115.8 37.1 51.5-0.1 90.6-12.6 117.3-37.4 26.7-24.9 40-55.1 40.1-90.5 0-19.5-3.9-36.4-11.9-50.5-8-14.2-19.9-26.6-35.9-37.2l197.1-0.3 0.1-53.2-455.6 0.7-0.1 53.2 40-0.1c-16 10.6-27.6 23-34.7 37.2z m65.3-14.7c18.7-15.1 44.9-22.7 78.6-22.7 33.7-0.1 60.3 7.4 79.9 22.5 19.5 15 29.3 33.2 29.2 54.5 0 26.6-9.9 46.6-29.4 59.9-19.6 13.3-46.2 20-80 20.1-33.8 0.1-59.9-6.6-78.6-19.8-18.6-13.3-27.9-33.2-27.9-59.8 0.2-21.4 9.5-39.6 28.2-54.7z"></path></svg>
+              </div> -->
+            </div>
+            <div class="tp-r-line"></div>
+            <div class="tp-r-range">
+              <span class="label">不透明</span>
+              <input
+                class="range"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                v-model="nowFontOpacity"
+                @mousedown="rangeMouseDown($event, 'txt_opacity')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="showFontOpacity"></span>
+            </div>
+            <div class="tp-r-range">
+              <span class="label">字间距</span>
+              <input
+                class="range"
+                type="range"
+                min="-100"
+                max="100"
+                step="1"
+                v-model="nowFontSpace"
+                @mousedown="rangeMouseDown($event, 'txt_charSpacing')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="nowFontSpace"></span>
+            </div>
+            <div class="tp-r-range">
+              <span class="label">行间距</span>
+              <input
+                class="range"
+                type="range"
+                min="1"
+                max="5"
+                step="0.1"
+                v-model="nowFontLineHeight"
+                @mousedown="rangeMouseDown($event, 'txt_lineHeight')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="showFontLineHeight"></span>
+            </div>
+            <div class="tp-r-bottom-btns">
+              <div
+                class="tp-r-btn tp-r-bottom-btn"
+                @click.stop="toggleSortControl"
+              >
+                <span>排序</span>
+              </div>
+              <div
+                class="tp-r-btn tp-r-bottom-btn redText"
+                @click="removeTxt(nowSelectIndex)"
+              >
+                <span>删除文字</span>
+              </div>
+              <div
+                class="tp-r-range-vertical"
+                v-show="showRightSortControl"
+                @click.stop=""
+              >
+                <span class="label labelTop">置顶</span>
+                <div class="range">
+                  <input
+                    type="range"
+                    min="0"
+                    :max="canvasItemZIndex.length - 1"
+                    step="1"
+                    v-model="nowZIndex"
+                    @mousedown="rangeMouseDown($event, 'txt_zIndex')"
+                    @keydown.prevent=""
+                  />
+                  <div class="mark">
+                    <div class="degree" v-for="i in 16" :key="i"></div>
+                  </div>
+                </div>
+                <span class="label labelBottom">置底</span>
+              </div>
+            </div>
+          </div>
+          <!-- 右边 编辑层 当显示层中选中图片素材 -->
+          <div
+            class="tp-selecting-item tp-selecting-img"
+            v-show="nowSelect === 'img'"
+          >
+            <div class="tp-r-btn">
+              <span>替换图片</span>
+              <input
+                type="file"
+                accept="image/png,image/jpg,image/jpeg"
+                @change="onUploadReplaceImg"
+              />
+            </div>
+            <!-- 裁剪图片 难度太大 这功能先不做 -->
+            <div class="tp-r-line"></div>
+            <div class="tp-r-range">
+              <span class="label">不透明</span>
+              <input
+                class="range"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                v-model="nowImgOpacity"
+                @mousedown="rangeMouseDown($event, 'img_opacity')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="showImgOpacity"></span>
+            </div>
+            <div class="tp-r-range">
+              <span class="label">圆角</span>
+              <input
+                class="range"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                v-model="nowImgRadicus"
+                @mousedown="rangeMouseDown($event, 'img_tpRadius')"
+                @keydown.prevent=""
+              />
+              <span class="value" v-text="nowImgRadicus"></span>
+            </div>
+            <div class="tp-r-bottom-btns">
+              <div
+                class="tp-r-btn tp-r-bottom-btn"
+                @click.stop="toggleSortControl"
+              >
+                <span>排序</span>
+              </div>
+              <div class="tp-r-btn tp-r-bottom-btn redText" @click="removeImg">
+                <span>删除图片</span>
+              </div>
+              <div
+                class="tp-r-range-vertical"
+                v-show="showRightSortControl"
+                @click.stop=""
+              >
+                <span class="label labelTop">置顶</span>
+                <div class="range">
+                  <input
+                    type="range"
+                    min="0"
+                    :max="canvasItemZIndex.length - 1"
+                    step="1"
+                    v-model="nowZIndex"
+                    @mousedown="rangeMouseDown($event, 'img_zIndex')"
+                    @keydown.prevent=""
+                  />
+                  <div class="mark">
+                    <div class="degree" v-for="i in 16" :key="i"></div>
+                  </div>
+                </div>
+                <span class="label labelBottom">置底</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 插件 -->
+    <!-- <script type="text/javascript" src="/common/js/lib/fabricjs/fabric.min.js" ></script>
+    <script type="text/javascript" src="/common/js/lib/vuejs/vue.min.js" ></script>
+    <script type="text/javascript" src="/common/js/lib/jquery/1.9.1/jquery.min.js" ></script>
+    <script type="text/javascript" src="/admin/js/cropper.js"></script>
+    <script type="text/javascript" src="/common/js/lib/layer/2.4/layer.js" ></script>
+    <script type="text/javascript" src="/common/js/lib/spectrum.js"></script> -->
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/fabricjs/fabric.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/vuejs/vue.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/jquery/1.9.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/admin/js/cropper.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/layer/2.4/layer.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tongmeng.dg-tom.com/common/js/lib/spectrum.js"
+    ></script>
+    <!-- php提供的支持 -->
+    <script>
+      // var info = <?php echo $info;?>;
+      var info = {
+        id: 13,
+        poster_img_id: 167,
+        text_info: [
+          {
+            txt: "大鱼\n     海棠",
+            opt: {
+              tpIndex: "tp-txt-3",
+              top: 24.87085201793724,
+              left: 5.501777777777761,
+              opacity: 1,
+              angle: 0,
+              scaleX: 1,
+              scaleY: 1,
+              flipX: false,
+              flipY: false,
+              fontSize: "56",
+              fontWeight: "normal",
+              fontStyle: "normal",
+              underline: false,
+              linethrough: false,
+              textAlign: "left",
+              charSpacing: "100",
+              lineHeight: "1.3",
+              fill: "rgb(255,255,255)",
+            },
+          },
+        ],
+        img_info: [
+          {
+            src: "tongmeng\/haibao\/20200610\/EmMapCFh4w.jpg",
+            opt: {
+              tpIndex: "tp-img-1",
+              // top: -2.028665133776144,
+              // left: -1.7723069269022176,
+              top: 20,
+              left: 20,
+              tpRadius: 0,
+              opacity: 1,
+              angle: 0,
+              scaleX: 2.003190174167183,
+              scaleY: 1.850530974244925,
+              flipX: false,
+              flipY: false,
+            },
+          },
+          {
+            src: "tongmeng\/haibao\/20200610\/ZfRSfFSPWA.jpg",
+            opt: {
+              tpIndex: "tp-img-2",
+              top: 344.68688365542533,
+              left: 224.4084444444446,
+              tpRadius: 100,
+              opacity: 1,
+              angle: 0,
+              scaleX: 0.42101042150509044,
+              scaleY: 0.42101042150509044,
+              flipX: false,
+              flipY: false,
+            },
+          },
+          {
+            src: "tongmeng\/haibao\/20200707\/SptQBFX7WF.gif",
+            opt: {
+              tpIndex: "tp-img-4",
+              top: 417.0419282511212,
+              left: 215.00000000000009,
+              tpRadius: 100,
+              opacity: 1,
+              angle: 0,
+              scaleX: 0.685696386177789,
+              scaleY: 0.685696386177789,
+              flipX: false,
+              flipY: false,
+            },
+          },
+        ],
+        poster_img: ["tongmeng\/haibao\/20190813\/WFiE58mKyh.jpg"],
+      };
+      // var posterImg_list = <?php echo $posterImg_list;?>;
+      var posterImg_list = [
+        {
+          id: 162,
+          poster_img: ["tongmeng\/haibao\/20200603\/e757jhRZeK.jpg"],
+          title: "问问",
+          type_name: null,
+        },
+        {
+          id: 163,
+          poster_img: ["tongmeng\/haibao\/20190813\/6mG7iHj3ar.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 164,
+          poster_img: ["tongmeng\/haibao\/20190813\/mTSmrr6K2j.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 165,
+          poster_img: ["tongmeng\/haibao\/20190813\/pkX2sJ3iTm.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 166,
+          poster_img: ["tongmeng\/haibao\/20190813\/xwWxKT7fJX.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 167,
+          poster_img: ["tongmeng\/haibao\/20190813\/WFiE58mKyh.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 168,
+          poster_img: ["tongmeng\/haibao\/20190813\/6WkQBQzchK.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 169,
+          poster_img: ["tongmeng\/haibao\/20190813\/QJ5tm2n6eH.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 170,
+          poster_img: ["tongmeng\/haibao\/20190813\/2keHap6MEX.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 171,
+          poster_img: ["tongmeng\/haibao\/20190813\/zPaWEdFRis.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 172,
+          poster_img: ["tongmeng\/haibao\/20190813\/EpiMZAXkBQ.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 173,
+          poster_img: ["tongmeng\/haibao\/20190813\/tirNrzNec5.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 174,
+          poster_img: ["tongmeng\/haibao\/20190813\/GKZTtArSbc.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 175,
+          poster_img: ["tongmeng\/haibao\/20190813\/WtxpK3sYhj.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 176,
+          poster_img: ["tongmeng\/haibao\/20190813\/c64iXA8Ahc.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 177,
+          poster_img: ["tongmeng\/haibao\/20190813\/5BGkpk5cP7.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 178,
+          poster_img: ["tongmeng\/haibao\/20190813\/NtHWbKsc5s.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 179,
+          poster_img: ["tongmeng\/haibao\/20190813\/7Z6xbEJYt5.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 180,
+          poster_img: ["tongmeng\/haibao\/20190813\/hAzhsijFZc.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 181,
+          poster_img: ["tongmeng\/haibao\/20190813\/YDJkhPB8XP.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 182,
+          poster_img: ["tongmeng\/haibao\/20190813\/kxhDXYtMst.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 183,
+          poster_img: ["tongmeng\/haibao\/20190813\/iEwedmHYK7.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 184,
+          poster_img: ["tongmeng\/haibao\/20190813\/6KxDJcMS6m.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 185,
+          poster_img: ["tongmeng\/haibao\/20190813\/h4KhN7SnS8.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 186,
+          poster_img: ["tongmeng\/haibao\/20190813\/RaBNYzpSpC.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 187,
+          poster_img: ["tongmeng\/haibao\/20190813\/kdd4Xb5aab.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 188,
+          poster_img: ["tongmeng\/haibao\/20190813\/MbWGe7JMCA.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 189,
+          poster_img: ["tongmeng\/haibao\/20190813\/m32KzjKZfY.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 190,
+          poster_img: ["tongmeng\/haibao\/20190813\/Ep8Ez7tJee.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 191,
+          poster_img: ["tongmeng\/haibao\/20190813\/DGreKxaS2j.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 192,
+          poster_img: ["tongmeng\/haibao\/20190813\/sdp4Amk38c.jpg"],
+          title: "点灯资讯",
+          type_name: null,
+        },
+        {
+          id: 194,
+          poster_img: ["tongmeng\/haibao\/20200605\/885rc6eWfa.jpg"],
+          title: "许晓荣01",
+          type_name: null,
+        },
+        {
+          id: 195,
+          poster_img: ["tongmeng\/haibao\/20200605\/iPSskPJaRF.jpg"],
+          title: "111",
+          type_name: null,
+        },
+        {
+          id: 196,
+          poster_img: ["tongmeng\/haibao\/20200605\/s6mPZDaXPB.jpg"],
+          title: "111",
+          type_name: null,
+        },
+        {
+          id: 197,
+          poster_img: ["tongmeng\/haibao\/20200605\/6bXiKBG85R.jpg"],
+          title: "0",
+          type_name: null,
+        },
+        {
+          id: 198,
+          poster_img: ["tongmeng\/haibao\/20200605\/RR7Ctp6e7E.jpg"],
+          title: "0",
+          type_name: null,
+        },
+        {
+          id: 199,
+          poster_img: ["tongmeng\/haibao\/20200605\/X7BtMNShTt.jpg"],
+          title: "点灯测试",
+          type_name: null,
+        },
+        {
+          id: 200,
+          poster_img: ["tongmeng\/haibao\/20200605\/nAC6KtCJbr.jpg"],
+          title: "测试0",
+          type_name: null,
+        },
+        {
+          id: 201,
+          poster_img: ["tongmeng\/haibao\/20200605\/sJPMpRDeeK.jpg"],
+          title: "0605",
+          type_name: null,
+        },
+      ];
+      // var posterWord_list = <?php echo $posterWord_list;?>;
+      var posterWord_list = [
+        { content: "一二三四五六七八九十一二" },
+        { content: "一一一二二二三三三四四四" },
+        { content: "1024,程序人生" },
+        { content: "1121，买了佛冷" },
+        { content: "测试1\r\n测试2" },
+      ];
+      // var oss_url = '<?php echo $oss_url;?>';
+      var oss_url = "https://osstest.dg-mall.com";
+      // console.log(info)
+      // console.log(posterImg_list)
+      // console.log(posterWord_list)
+      // console.log(oss_url)
+      var errCb = function (text) {
+        layer.msg(text);
+      };
+      var phpTemplatePosterData = {
+        // 根据id得到的当前海报模板信息 其中poster_img最终不存库
+        data: info,
+        // alioss的域名
+        aliossHost: oss_url + "/",
+        // 读库得到的文字库数据
+        txts: posterWord_list.map(function (item) {
+          return item.content;
+        }),
+        // 读库得到的图片素材数据 这版不做
+        imgs: [] || null,
+        // 读库得到的 点灯资讯 这个海报模板类型的海报背景图数据
+        bgs: posterImg_list,
+        // 提供给前端的方法 上传文件到alioss并且最终执行前端传入的回调
+        uploadImgToOssWithCb: function (file, cb) {
+          return new Promise(function (resolve, reject) {
+            try {
+              var imgName =
+                new Date().getTime() +
+                (file.type === "image/jpeg" ? ".jpg" : ".gif");
+              var aliOssSign = phpTemplatePosterData.getAliOssSign("haibao");
+              var addPost = phpTemplatePosterData.getAliUploadParams(
+                aliOssSign,
+                imgName
+              );
+              var form = new FormData();
+              for (let key in addPost) {
+                form.append(key, addPost[key]);
+              }
+              form.append("file", file);
+              phpTemplatePosterData.sendPost(
+                aliOssSign.host,
+                form,
+                function () {
+                  // 返回上传后的图片
+                  phpTemplatePosterData.imgUrl =
+                    aliOssSign.host + "/" + addPost.key;
+                  cb && cb();
+                  resolve(phpTemplatePosterData.imgUrl);
+                },
+                function (error) {
+                  errCb && errCb(error);
+                }
+              );
+            } catch (error) {
+              console.log(error);
+              reject(error);
+            }
+          });
+        },
+        imgUrl: "",
+        // 提供给前端的方法 添加/保存 执行的方法，前端最终存库操作，会传入前端处理好的数据
+        saveData: function (data, cb) {
+          try {
+            // 不调用接口吧
+            //执行回调 页面关闭layer弹层等操作
+            layer.msg(
+              "保存成功",
+              {
+                time: 2000,
+              },
+              function () {
+                cb && cb();
+              }
+            );
+            // // 存库
+            // if (data) {
+            //   $.ajax({
+            //     // url: "{{route('poster_template.setTemplate')}}",
+            //     url: "https://tongmeng.dg-tom.com/tmadmin/poster_template/setTemplate",
+            //     data: {
+            //       id: data.id,
+            //       poster_img_id: data.poster_img_id,
+            //       text_info: JSON.stringify(data.text_info),
+            //       img_info: JSON.stringify(data.img_info),
+            //       preview_url: data.preview_url,
+            //     },
+            //     dataType: "json",
+            //     type: "POST",
+            //     headers: {
+            //       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            //     },
+            //     success: function (ret) {
+            //       if (ret.status) {
+            //         //执行回调 页面关闭layer弹层等操作
+            //         layer.msg(
+            //           ret.msg,
+            //           {
+            //             time: 2000,
+            //           },
+            //           function () {
+            //             cb && cb();
+            //           }
+            //         );
+            //       }
+            //     },
+            //     error: function (error) {
+            //       layer.closeAll("loading");
+            //       errCb && errCb(error);
+            //     },
+            //   });
+            // } else {
+            //   layer.closeAll("loading");
+            //   layer.msg("数据出错,请联系开发人员.");
+            // }
+          } catch (error) {
+            console.log(error);
+            layer.closeAll("loading");
+            layer.msg("保存出错,请联系开发人员.");
+          }
+        },
+        // post发送请求方法
+        sendPost: function (url, form, cb, errCb) {
+          $.ajax({
+            url: url,
+            data: form,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function (ret) {
+              cb && cb();
+            },
+            error: function (error) {
+              errCb && errCb(error);
+            },
+          });
+        },
+        //获取阿里OS签名
+        getAliOssSign: function (cate) {
+          //获取签名
+          $.ajax({
+            type: "get",
+            // url: "/api/osssign/" + cate,
+            url: "https://tongmeng.dg-tom.com/api/osssign/" + cate,
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (json) {
+              window.aliOssSign = json;
+            },
+          });
+
+          return window.aliOssSign;
+        },
+        //获取直传阿里OSS参数
+        getAliUploadParams: function (aliOssSign, fileName) {
+          var addPost = {
+            key: aliOssSign.dir + phpTemplatePosterData.buildFileName(fileName),
+            policy: aliOssSign.policy,
+            OSSAccessKeyId: aliOssSign.accessid,
+            success_action_status: "200",
+            signature: aliOssSign.signature,
+          };
+
+          return addPost;
+        },
+        //创建文件名
+        buildFileName: function (filename) {
+          var chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+          var maxPos = chars.length;
+          var random_string = "";
+          for (i = 0; i < 10; i++) {
+            random_string += chars.charAt(Math.floor(Math.random() * maxPos));
+          }
+
+          var pos = filename.lastIndexOf(".");
+          var suffix = "";
+          if (pos != -1) {
+            suffix = filename.substring(pos);
+          }
+
+          return random_string + suffix;
+        },
+        // 预览页面的链接
+        // previewRoute: '{{route('poster_template.preview')}}'
+        previewRoute:
+          // "https://tongmeng.dg-tom.com/tmadmin/poster_template/preview",
+          "./preview.html",
+      };
+    </script>
+    <!-- 页面逻辑 -->
+    <!--
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinTopControls.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinLeftMenu.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinCanvasBg.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinTxts.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinImgs.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/mixinRightForm.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/admin/js/posterTemplateSet/index.js"
+    ></script>
+    -->
+    <script type="text/javascript" src="./js/mixinTopControls.js"></script>
+    <script type="text/javascript" src="./js/mixinLeftMenu.js"></script>
+    <script type="text/javascript" src="./js/mixinCanvasBg.js"></script>
+    <script type="text/javascript" src="./js/mixinTxts.js"></script>
+    <script type="text/javascript" src="./js/mixinImgs.js"></script>
+    <script type="text/javascript" src="./js/mixinRightForm.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+  </body>
+</html>
